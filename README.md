@@ -194,7 +194,8 @@ The module creates:
 
 **Error:**
 ```
-Error: Error building image: exit status 1: Error: Cannot perform an interactive login from a non TTY device; ensure ~/.docker/config.json exists
+Error: Error loading registry auth config: could not open config file from filePath: ~/.docker/config.json.
+Error: open ~/.docker/config.json: no such file or directory
 ```
 
 **Solution:**
