@@ -64,4 +64,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Security considerations
   - Implementation notes
 
-[1.0.0]: https://github.com/username/repository/releases/tag/v1.0.0
+[1.0.0]: https://github.com/andrea-spoldi/sp-case-module/releases/tag/v1.0.0
