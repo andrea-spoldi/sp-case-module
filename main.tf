@@ -157,7 +157,7 @@ resource "aws_lb_target_group" "alb_target-group_8180AAF8" {
     path    = "/"
   }
   depends_on = [
-    "aws_lb_listener.alb_lb-listener_A1DFDAB3",
+    aws_lb_listener.alb_lb-listener_A1DFDAB3,
   ]
 }
 resource "aws_lb_listener_rule" "alb_rule_69CE26D1" {
@@ -202,7 +202,7 @@ resource "aws_ecs_service" "alb_service_A77A0FB4" {
     subnets = var.private_subnet_ids
   }
   depends_on = [
-    "aws_lb_listener.alb_lb-listener_A1DFDAB3",
+    aws_lb_listener.alb_lb-listener_A1DFDAB3,
   ]
 }
 resource "aws_security_group" "service-security-group" {
