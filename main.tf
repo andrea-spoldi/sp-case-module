@@ -128,9 +128,12 @@ resource "aws_lb" "alb_7A364839" {
     "${aws_security_group.alb_lb-security-group_44BBEC62.id}"
   ]
   subnets = var.public_subnet_ids
-  access_logs {
-    bucket  = ""
-    enabled = var.is_alb_logging_enabled
+  dynamic "access_logs" {
+    for_each = var.is_alb_logging_enabled ? [1] : []
+    content {
+      bucket  = var.cdn_logging_bucket
+      enabled = var.is_alb_logging_enabled
+    }
   }
 }
 resource "aws_lb_listener" "alb_lb-listener_A1DFDAB3" {
@@ -190,7 +193,7 @@ resource "aws_ecs_service" "alb_service_A77A0FB4" {
   name            = var.service_name
   task_definition = aws_ecs_task_definition.workload_task_D14CB3AA.arn
   load_balancer {
-    container_name   = var.service_name
+    container_name   = var.container_name
     container_port   = var.service_port
     target_group_arn = aws_lb_target_group.alb_target-group_8180AAF8.arn
   }
@@ -259,8 +262,11 @@ resource "aws_cloudfront_distribution" "main_cdn_727A99AA" {
       }
     }
   }
-  logging_config {
-    bucket = var.cdn_logging_bucket
+  dynamic "logging_config" {
+    for_each = var.is_cdn_logging_enabled ? [1] : []
+    content {
+      bucket = var.cdn_logging_bucket
+    }
   }
   origin {
     domain_name = aws_lb.alb_7A364839.dns_name
