@@ -186,6 +186,26 @@ The module creates:
 5. Load balancer is in public subnets
 6. VPC infrastructure can be provided either directly or through a VPC module
 
+## Troubleshooting
+
+### Common Issues
+
+#### .docker/config.json not found
+
+**Error:**
+```
+Error: Error building image: exit status 1: Error: Cannot perform an interactive login from a non TTY device; ensure ~/.docker/config.json exists
+```
+
+**Solution:**
+Create an empty Docker config file:
+```bash
+mkdir -p ~/.docker
+touch ~/.docker/config.json
+```
+
+This error typically occurs when Docker can't find its configuration file. Creating an empty config file usually resolves the issue.
+
 ## Contributing
 
 1. Fork the repository
